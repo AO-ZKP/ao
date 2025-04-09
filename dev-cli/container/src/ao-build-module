@@ -145,6 +145,8 @@ def main():
     cmd.extend([quote(v.filepath) for v in dependency_libraries])
     cmd.extend(config.get_extra_args())
 
+    cmd.extend(['-I','/opt','/opt/lsqlite3.c', '/opt/sqlite3.c'])
+
     # Export the main function and malloc for the runtime
     cmd.extend(['-s', 'EXPORTED_FUNCTIONS=["_malloc", "_main"]'])
 

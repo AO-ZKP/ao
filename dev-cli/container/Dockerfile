@@ -89,6 +89,11 @@ COPY ./src/ao_module_lib /usr/local/ao-module/ao_module_lib
 
 COPY ./src/core/ /opt/
 
+COPY ./src/sqlite/lsqlite3.c /opt/lsqlite3.c
+COPY ./src/sqlite/lsqlite3.h /opt/lsqlite3.h
+COPY ./src/sqlite/sqlite3.c /opt/sqlite3.c
+COPY ./src/sqlite/sqlite3.h /opt/sqlite3.h
+
 RUN mkdir -p /opt/src
 COPY ./src/json.lua /opt/src/json.lua
 # COPY ./src/ao.lua /opt/src/ao.lua
