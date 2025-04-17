@@ -4,6 +4,8 @@
 
 #include <emscripten.h>
 
+#include "lsqlite3.h"
+
 #ifdef __cplusplus
 #include "lua.hpp"
 #else
@@ -140,6 +142,12 @@ extern "C"
   int boot_lua(lua_State *L)
   {
     luaL_openlibs(L);
+
+    // Preload lsqlite3
+    luaL_getsubtable(L, LUA_REGISTRYINDEX, LUA_PRELOAD_TABLE);
+    lua_pushcfunction(L, luaopen_lsqlite3);
+    lua_setfield(L, -2, LUA_SQLLIBNAME);
+    lua_pop(L, 1);  // remove PRELOAD table
 
     if (luaL_loadbuffer(L, (const char *)program, sizeof(program), "main"))
     {
